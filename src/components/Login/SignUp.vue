@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <div class="form">
-      <Form class="login-form">
+      <Form class="login-form" @submit="handleSubmit">
         <div class="login-input">
           <Field
             type="text"
@@ -36,11 +36,26 @@
 import { defineRule, ErrorMessage, Field, Form } from "vee-validate";
 import "./Login.css";
 import { required } from "@vee-validate/rules";
+import { useUsersStore } from "../../stores/users";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 defineRule("required", required);
 
 const username = ref("");
 const password = ref("");
+const router = useRouter();
+
+const userStore = useUsersStore();
+
+function handleSubmit() {
+  userStore.addUser({
+    id: Date.now(),
+    username: username.value,
+    password: password.value,
+  });
+  router.push("/dashboard");
+}
 </script>
 
 <style></style>

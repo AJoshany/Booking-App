@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useRouter } from "vue-router";
 
 export const useUsersStore = defineStore("users", {
   state: () => ({
@@ -9,6 +10,7 @@ export const useUsersStore = defineStore("users", {
     addUser(user) {
       this.users.push(user);
       this.saveToLocalStorage();
+      console.log(user);
       localStorage.setItem("currentUser", JSON.stringify(user));
     },
     removeUser(index) {
@@ -32,6 +34,10 @@ export const useUsersStore = defineStore("users", {
       } else {
         return false;
       }
+    },
+    logOut() {
+      localStorage.removeItem("currentUser");
+      
     },
     saveToLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));

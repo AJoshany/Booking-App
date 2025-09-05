@@ -1,11 +1,11 @@
 <template>
   <div class="login-page">
     <div class="form">
-      <Form class="login-form">
+      <Form class="login-form" @submit="handleSubmit">
         <div class="login-input">
           <Field
-            type="text"
-            placeholder="username"
+            type="email"
+            placeholder="email"
             name="username"
             rules="required"
             v-model="username"
@@ -39,12 +39,24 @@ import "./Login.css";
 import { required } from "@vee-validate/rules";
 import { ref } from "vue";
 import { useUsersStore } from "../../stores/users";
+import { useRouter } from "vue-router";
 
-const username = ref("")
-const password = ref("")
+const username = ref("");
+const password = ref("");
 
 const usersStore = useUsersStore();
 
+const router = useRouter();
+
+function handleSubmit() {
+  const loginResult = usersStore.login(username.value, password.value);
+  if (loginResult) {
+    alert("login successfully");
+    router.push("/dashboard");
+  } else {
+    alert("Invalid User Data");
+  }
+}
 
 defineRule("required", required);
 </script>
