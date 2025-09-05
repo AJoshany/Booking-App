@@ -53,6 +53,7 @@ function handleSubmit() {
     id: Date.now(),
     username: username.value,
     password: password.value,
+    apointments:[],
   });
   router.push("/dashboard");
 }
