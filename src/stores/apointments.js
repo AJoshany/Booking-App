@@ -29,13 +29,17 @@ export const useApointmentStore = defineStore("apointment", {
     },
 
     getApoWeekDays() {
-      let weekDays = [];
+      let dates = [];
       this.allApointments.map((apo) => {
-        if (!weekDays.includes(apo.weekDay)) {
-          weekDays.push(apo.weekDay);
+        const exist = dates.find((d) => d.weekDay === apo.weekDay) || null;
+        if (!exist) {
+          dates.push({
+            weekDay: apo.weekDay,
+            date: apo.date,
+          });
         }
       });
-      return weekDays || [];
+      return dates || [];
     },
 
     getApoByWeekDay(apoWeekDay) {
