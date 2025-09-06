@@ -27,7 +27,11 @@ export const useApointmentStore = defineStore("apointment", {
 
       this.saveToLocalStorage();
     },
-
+    unReserve(id) {
+      const apo = this.allApointments.find((a) => a.id === id)
+      apo.reserved = !apo.reserved
+      this.saveToLocalStorage()
+    },
     getApoWeekDays() {
       let dates = [];
       this.allApointments.map((apo) => {

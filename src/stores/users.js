@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 export const useUsersStore = defineStore("users", {
   state: () => ({
     users: JSON.parse(localStorage.getItem("users") || "[]"),
+    user: JSON.parse(localStorage.getItem("currentUser")) || "{}"
   }),
 
   actions: {
@@ -33,6 +34,14 @@ export const useUsersStore = defineStore("users", {
       } else {
         return false;
       }
+    },
+    removeApo(apo) {
+      this.user = JSON.parse(localStorage.getItem("currentUser"))
+      const index = this.user.apointments.indexOf((a) => a === apo)
+      this.user.apointments.splice(index, 1)
+      localStorage.setItem("currentUser", JSON.stringify(user))
+      this.saveToLocalStorage()
+
     },
     logOut() {
       localStorage.removeItem("currentUser");
