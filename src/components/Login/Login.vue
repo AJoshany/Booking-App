@@ -52,7 +52,7 @@ function handleSubmit() {
   const loginResult = usersStore.login(username.value, password.value);
   if (loginResult) {
     alert("login successfully");
-    router.push("/dashboard");
+    router.push("/appointments");
   } else {
     alert("Invalid User Data");
   }

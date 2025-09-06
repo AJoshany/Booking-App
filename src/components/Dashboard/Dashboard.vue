@@ -1,7 +1,6 @@
 <template>
   <div>
     DashBoard
-    <Apointments />
     <button @click="handleLogOut">Logout</button>
   </div>
 </template>

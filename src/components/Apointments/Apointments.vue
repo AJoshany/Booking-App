@@ -1,4 +1,6 @@
 <template>
+  <div class="main">
+    <h2>Dr.Ernest appointment times</h2>
   <div class="apo-main">
     <ul class="weekDays">
       <li
@@ -26,22 +28,22 @@
       </div>
     </div>
   </div>
+  <RouterLink to="/dashboard" class="link">Dashboard ></RouterLink>
+  </div>
 </template>
 
 <script setup>
 import "./Apointments.css";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useApointmentStore } from "../../stores/apointments";
 import apoList from "./apoList";
+import { useRouter } from "vue-router";
 
 const apoStore = useApointmentStore();
 let allApointments = ref([]);
-allApointments.value = [...apoList];
-
-const weekDays = ref([]);
-weekDays.value = apoStore.getApoWeekDays();
-
 const activeWeekDay = ref("Monday");
+  allApointments.value = [...apoList];
+const weekDays = computed(()=>apoStore.getApoWeekDays()) 
 
 watch(
   allApointments,

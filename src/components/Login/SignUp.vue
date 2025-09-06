@@ -4,8 +4,8 @@
       <Form class="login-form" @submit="handleSubmit">
         <div class="login-input">
           <Field
-            type="text"
-            placeholder="username"
+            type="email"
+            placeholder="email"
             name="username"
             rules="required"
             v-model="username"
@@ -55,7 +55,7 @@ function handleSubmit() {
     password: password.value,
     apointments:[],
   });
-  router.push("/dashboard");
+  router.push("/appointments");
 }
 </script>
 
