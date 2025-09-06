@@ -10,7 +10,6 @@ export const useUsersStore = defineStore("users", {
     addUser(user) {
       this.users.push(user);
       this.saveToLocalStorage();
-      console.log(user);
       localStorage.setItem("currentUser", JSON.stringify(user));
     },
     removeUser(index) {
@@ -37,7 +36,6 @@ export const useUsersStore = defineStore("users", {
     },
     logOut() {
       localStorage.removeItem("currentUser");
-      
     },
     saveToLocalStorage() {
       localStorage.setItem("users", JSON.stringify(this.users));

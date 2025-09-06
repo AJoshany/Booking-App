@@ -1,7 +1,7 @@
 <template>
   <div>
     DashBoard
-
+    <Apointments />
     <button @click="handleLogOut">Logout</button>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useUsersStore } from "../../stores/users";
+import Apointments from "../Apointments/Apointments.vue";
 
 const userStore = useUsersStore();
 

@@ -5,10 +5,47 @@ export const useApointmentStore = defineStore("apointment", {
     allApointments: JSON.parse(localStorage.getItem("allApointments") || "[]"),
   }),
   actions: {
-    reserve(index) {
-      this.allApointments[index].reserved = true;
+    addApointment(apo) {
+      const exist = this.allApointments.find((a) => a.id === apo.id);
+      if (!exist) {
+        this.allApointments.push(apo);
+        this.saveToLocalStorage();
+      } else return;
+    },
+    reserve(id) {
+      const apo = this.allApointments.find((a) => a.id === id);
+      apo.reserved = !apo.reserved;
+      const user = JSON.parse(localStorage.getItem("currentUser")) || {};
+      const users = JSON.parse(localStorage.getItem("users"));
+      if (!user.apointments) {
+        user.apointments = [];
+      }
+      user.apointments.push(apo);
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      users.find((u) => u.id === user.id).apointments = user.apointments;
+      localStorage.setItem("users", JSON.stringify(users));
+
       this.saveToLocalStorage();
     },
+
+    getApoWeekDays() {
+      let weekDays = [];
+      this.allApointments.map((apo) => {
+        if (!weekDays.includes(apo.weekDay)) {
+          weekDays.push(apo.weekDay);
+        }
+      });
+      return weekDays || [];
+    },
+
+    getApoByWeekDay(apoWeekDay) {
+      const apos = this.allApointments.filter((a) => {
+        return a.weekDay === apoWeekDay;
+      });
+
+      return apos;
+    },
+
     saveToLocalStorage() {
       localStorage.setItem(
         "allApointments",
