@@ -30,6 +30,11 @@ export const useApointmentStore = defineStore("apointment", {
       if (!user.apointments.find((a) => a.id === apo.id)) {
         user.apointments.push(apo);
       }
+      const userIndex = users.findIndex((a) => a.id === user.id);
+
+      if (userIndex !== -1) {
+        users[userIndex].apointments = user.apointments;
+      }
       userStore.user = { ...user };
       userStore.saveToLocalStorage();
       localStorage.setItem("currentUser", JSON.stringify(userStore.user));
@@ -41,7 +46,7 @@ export const useApointmentStore = defineStore("apointment", {
       const apo = this.allApointments.find((a) => a.id === id);
       if (!apo) return;
       apo.reserved = false;
-
+      const userStore = useUsersStore();
       const user = userStore.user;
       const users = userStore.users;
 
@@ -59,7 +64,7 @@ export const useApointmentStore = defineStore("apointment", {
 
       this.userApointments = user.apointments;
 
-      userStore.user = user.apointments;
+      userStore.user.apointments = user.apointments;
       userStore.saveToLocalStorage();
 
       this.saveToLocalStorage();

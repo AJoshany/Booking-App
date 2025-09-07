@@ -1,34 +1,35 @@
 <template>
   <div class="main">
     <h2>Dr.Ernest appointment times</h2>
-  <div class="apo-main">
-    <ul class="weekDays">
-      <li
-        v-for="(wd, index) in weekDays"
-        :key="index"
-        class="day"
-        :class="{ active: wd.weekDay === activeWeekDay }"
-        @click="changeActiveDay"
-      >
-        {{ wd.weekDay }}
-        <span>{{ wd.date }}</span>
-      </li>
-    </ul>
-    <div class="apoTimes">
-      <div
-        v-for="apo in apoStore.getApoByWeekDay(activeWeekDay)"
-        :key="apo.id"
-        class="apoTime"
-        :class="{ reserved: apo.reserved }"
-      >
-        <span>{{ apo.time }}</span>
-        <button @click="apoStore.reserve(apo.id)" :disabled="apo.reserved">
-          Reserve
-        </button>
+    <div class="apo-main">
+      <ul class="weekDays">
+        <li
+          v-for="(wd, index) in weekDays"
+          :key="index"
+          class="day"
+          :class="{ active: wd.weekDay === activeWeekDay }"
+          @click="changeActiveDay"
+        >
+          {{ wd.weekDay }}
+          <span>{{ wd.date }}</span>
+        </li>
+      </ul>
+
+      <div class="apoTimes">
+        <div
+          v-for="apo in apoStore.getApoByWeekDay(activeWeekDay)"
+          :key="apo.id"
+          class="apoTime"
+          :class="{ reserved: apo.reserved }"
+        >
+          <span>{{ apo.time }}</span>
+          <button @click="apoStore.reserve(apo.id)" :disabled="apo.reserved">
+            Reserve
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <RouterLink to="/dashboard" class="link">Dashboard ></RouterLink>
+    <RouterLink to="/dashboard" class="link">Dashboard ></RouterLink>
   </div>
 </template>
 
@@ -42,8 +43,8 @@ import { useRouter } from "vue-router";
 const apoStore = useApointmentStore();
 let allApointments = ref([]);
 const activeWeekDay = ref("Monday");
-  allApointments.value = [...apoList];
-const weekDays = computed(()=>apoStore.getApoWeekDays()) 
+allApointments.value = [...apoList];
+const weekDays = computed(() => apoStore.getApoWeekDays());
 
 watch(
   allApointments,

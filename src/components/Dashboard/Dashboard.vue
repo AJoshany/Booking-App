@@ -3,7 +3,11 @@
     <h2>Dashboard</h2>
     <div class="dashboard-main">
       <div class="dashboard__left-side">
-        <span>My AppointMents</span>
+        <div class="left-list">
+          <span class="active">My AppointMents</span>
+          <span>Infos</span>
+          <span>Payments</span>
+        </div>
 
         <button @click="handleLogOut" class="logout-btn">Logout</button>
       </div>
@@ -45,4 +49,4 @@ function handleRemove(apo) {
 }
 </script>
 
-<style></style>
+<style scoped></style>
