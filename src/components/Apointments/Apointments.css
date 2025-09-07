@@ -22,6 +22,15 @@
   gap: 15px;
 }
 
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 30px 20px;
+  }
+  .apo-main {
+    gap: 10px;
+  }
+}
+
 .weekDays {
   display: flex;
   flex-direction: column;
@@ -53,7 +62,14 @@
 
   color: rgba(0, 0, 0, 0.6);
 }
-
+@media screen and (max-width: 768px) {
+  .weekDays {
+    padding-right: 5px;
+  }
+  .weekDays .day {
+    padding: 15px 5px;
+  }
+}
 .weekDays .day:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border-bottom-color: #4caf50;
@@ -76,6 +92,7 @@
 @media screen and (max-width: 768px) {
   .apoTimes {
     grid-template-columns: 1fr 1fr;
+    gap: 5px;
   }
 }
 

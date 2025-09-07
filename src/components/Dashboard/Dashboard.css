@@ -15,8 +15,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  .dashboard-main {
+    gap: 10px;
+  }
   .myAppointments {
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 }
 
@@ -89,6 +93,21 @@
   /* border-radius: 5px; */
   transition: all 0.1s ease-in;
   cursor: pointer;
+}
+
+@media screen and (max-width: 920px) {
+  .dashboard__left-side {
+    padding: 0;
+    padding-right: 5px;
+  }
+
+  .left-list span {
+    padding: 15px 10px;
+    font-size: 14px;
+  }
+  .apo {
+    padding: 5px 10px;
+  }
 }
 .left-list span:hover {
   background-color: rgba(0, 0, 0, 0.1);

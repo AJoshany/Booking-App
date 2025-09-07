@@ -1,9 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  min-width: 360px;
   padding: 8% 0 0;
   margin: auto;
+}
+
+@media screen and (min-width: 1024px) {
+  .login-page {
+    min-width: 360px;
+  }
 }
 .form {
   position: relative;
