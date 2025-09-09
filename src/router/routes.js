@@ -10,8 +10,28 @@ function isLogin() {
 }
 
 const routes = [
-  { path: "/", component: Login },
-  { path: "/signup", component: SignUp },
+  {
+    path: "/",
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (isLogin()) {
+        next("/dashboard");
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: "/signup",
+    component: SignUp,
+    beforeEnter: (to, from, next) => {
+      if (isLogin()) {
+        next("/dashboard");
+      } else {
+        next();
+      }
+    },
+  },
   {
     path: "/dashboard",
     component: Dashboard,
